@@ -1,0 +1,33 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert-error.pug
+block main
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.error)
+        +alert-danger(2000)
+    .container 
+        h2 #{pageTitle}
+        form(
+            action = `${prefixAdmin}/setting/general?_method=PATCH`
+            method='POST'
+            enctype="multipart/form-data"
+        )
+
+            .form-group
+                label(for="email") Email
+                input(type="text" class="form-control" id="email" name='email' value=settingGeneral?settingGeneral.email:'')
+            
+            .form-group
+                label(for="phone") Số điện thoại
+                input(type="text" class="form-control" id="phone" name='phone' value=settingGeneral?settingGeneral.phone:'')
+
+            .form-group
+                label(for="logo") Logo
+                input(type="file" class="form-control" id="logo" name='logo' accept='image/*')
+            
+            .form-group
+                label(for="footer") Nhập footer
+                input(type="footer" class="form-control" id="footer" name='footer' value=settingGeneral?settingGeneral.footer:'')
+            
+            
+            button(type="submit" class="btn btn-primary form-control mb-10" style='margin-bottom: 10px') Cập nhật

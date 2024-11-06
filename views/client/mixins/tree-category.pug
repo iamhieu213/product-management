@@ -1,0 +1,12 @@
+mixin tree-category(items)               
+    if(items)
+        each item in items
+            li(class='category-item' id=item.id)
+                a(href=`/products/${item.slug}`) #{item.title} 
+                if(item.children && item.children.length > 0)
+                    ul(class='sub-category')
+                        +tree-category(item.children)
+
+
+
+        

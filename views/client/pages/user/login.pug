@@ -1,0 +1,27 @@
+extends ../../layouts/default.pug
+include ../../mixins/products-list.pug
+include ../../mixins/alert-error.pug
+block main
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.error)
+        +alert-danger(2000)
+    .container 
+        h2 #{pageTitle}
+        form(
+            action = '/user/login'
+            method='POST'
+        )
+            .form-group
+                label(for="email") Nhập email
+                input(type="email" class="form-control" id="email" name='email')
+            
+            .form-group
+                label(for="password") Password
+                input(type="password" class="form-control" id="password" name='password')
+                small(id="forgot-password" class="form-text text-muted")
+                    a(href="/user/password/forgot") Quên mật khẩu ?
+            
+            
+            button(type="submit" class="btn btn-primary form-control mb-10" style='margin-bottom: 10px') Đăng nhập
+

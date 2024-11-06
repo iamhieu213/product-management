@@ -1,0 +1,50 @@
+extends ../../layouts/default.pug
+include ../../mixins/products-list.pug
+include ../../mixins/alert-error.pug
+block main
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.danger)
+        +alert-danger(2000)
+    .container 
+        h2 #{pageTitle}
+        table.table.table-striped
+            thead
+                tr
+                    th(scope="col") STT
+                    th(scope="col") Ảnh
+                    th(scope="col") Tên sản phẩm
+                    th(scope="col") Số lượng
+                    th(scope="col") Đơn giá
+                    th(scope="col") Tổng
+            tbody
+                each item, index in cart.products 
+                    tr
+                        th(scope="row") #{index + 1}
+                        td
+                            img(src=item.product.thumbnail, alt="moimoi" style='width: 100px; height: 100px ')
+                        td #{item.product.title}
+                        td
+                            span #{item.quantity}
+                        td  #{item.product.priceNew}$
+                        td  #{item.totalPay}
+                        td
+        .btn.btn-success Tổng tiền: #{totalPerOrder}
+        form(
+            action='/checkout/order'
+            method='post'
+        )
+            .form-group
+                label(for="fullName") Họ tên
+                input(type="text" name='fullName' id='fullName' class='form-control')
+            .form-group
+                label(for="phone") Số điện thoại
+                input(type="text" name='phone' id='phone' class='form-control')
+            .form-group
+                label(for="address") Địa chỉ
+                input(type="text" name='address' id='address' class='form-control')
+
+            .form-group
+                button(type='submit' class='form-control btn btn-primary') Thanh toán
+
+        

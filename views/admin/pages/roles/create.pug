@@ -1,0 +1,23 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert-error.pug
+include ../../mixins/category-tree.pug
+block main
+
+
+    if(permissions.role.includes('roles-create'))
+        form(
+            action="/admin/roles/create?_method=POST"
+            method="POST"
+            id="form-create"
+        )
+            .row
+                .col-12
+                    label(for="title") Nhập tiêu đề
+                    input(type="text" placeholder="Tiêu đề" name="title" id="title") 
+                .col-12
+                    label(for="description") Nhập mô tả
+                    textarea(name="description" id="description" placeholder="Nhập mô tả") 
+                .col-12
+                    button(type="submit") Tạo
+
+        script(src="/admin/js/create-page.js")

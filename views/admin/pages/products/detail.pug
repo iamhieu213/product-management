@@ -1,0 +1,24 @@
+extends ../../layouts/default.pug
+
+block main 
+    if(permissions.role.includes('products-view'))
+        h2 #{item.title}
+
+        p Mô tả: !{item.description}
+
+        p Danh mục: #{category}
+
+        p Giá: #{item.price}
+
+        p Giảm giá: #{item.discountPercentage}
+
+        p Sản phẩm nổi bật: #{item.isOustanding=='1'?'Có':'Không'}
+
+        img(src=item.thumbnail, alt="xx" width=200 height=200)
+
+        p
+            -if(item.status == 'active')
+                span.btn.btn-success Hoạt động
+            -else
+                span.btn.btn-danger Dừng hoạt động
+        a(href=`${prefixAdmin}/products/edit/${item.id}` class="btn btn-success") Chỉnh sửa 

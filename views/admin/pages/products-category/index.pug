@@ -1,0 +1,79 @@
+extends ../../layouts/default.pug
+include ../../mixins/filter-status.pug
+include ../../mixins/search.pug
+include ../../mixins/pagination.pug
+include ../../mixins/alert-error.pug
+include ../../mixins/table-tree.pug
+block main
+    if(permissions.role.includes('products-category-view'))
+        if(messages.success)
+            .alert-success #{messages.success}
+        if(messages.error) 
+            +alert-danger(5000)
+        
+        h1 Trang danh mục sản phẩm
+
+        p Bộ lọc và tìm kiếm 
+
+        //- +filterStatus(filterStatus)
+        //- +search(keyword)
+
+        form(
+            action=`${prefixAdmin}/products-category/change-multi?_method=PATCH`
+            method="POST"
+            form-change-multi
+        )
+                .row 
+                    .col-4
+                        select(name="status")
+                            option(value="active") Hoạt động
+                            option(value="inactive") Dừng hoạt động
+                            option(value="delete-all") Xóa tất cả
+                            option(value="change-position")  Thay đổi vị trí
+                        input(type="text" name="ids" class="d-none")
+                        button(type="submit") Áp dụng
+                    .col-4 
+                        a(href=`${prefixAdmin}/products-category/create` class="create-new-products-link") Tạo danh mục mới
+        
+        .row 
+            .col-4 
+                label(for="sort") Sắp xếp theo
+            .col-12
+                select(name="sort" id='sort' sort-select) 
+                    option(value="position-desc") Vị trí giảm dần
+                    option(value="position-asc") Vị trí tăng dần
+                    option(value="title-asc") A - Z
+                    option(value="title-desc") Z - A
+        
+        table(checkbox-multi)
+            thead 
+                tr 
+                    th
+                        input(type="checkbox" value="checkall")
+                    th STT
+                    th Hình ảnh 
+                    th Tiêu đề
+                    th Vị trí
+                    th Trạng thái
+                    th Hành động
+            tbody
+                +table-tree(listCategory)
+
+
+
+
+        form(action=""
+            method="POST"
+            id="form-change-status"
+            path=`${prefixAdmin}/products-category/change-status`
+        )
+
+        form(
+            action=""
+            method="POST"
+            id="form-delete-one"
+            path=`${prefixAdmin}/products-category/delete`
+        ) 
+
+        script(src="/admin/js/script.js")
+        script(src="/admin/js/product.admin.js")

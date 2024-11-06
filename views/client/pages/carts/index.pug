@@ -1,0 +1,39 @@
+extends ../../layouts/default.pug
+include ../../mixins/products-list.pug
+include ../../mixins/alert-error.pug
+block main
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.danger)
+        +alert-danger(2000)
+    .container 
+        h2 #{pageTitle}
+        if(cart.products.length > 0)
+            table.table.table-striped
+                thead
+                    tr
+                        th(scope="col") STT
+                        th(scope="col") Ảnh
+                        th(scope="col") Tên sản phẩm
+                        th(scope="col") Số lượng
+                        th(scope="col") Đơn giá
+                        th(scope="col") Tổng
+                        th(scope="col") Hành động
+                tbody
+                    each item, index in cart.products 
+                        tr
+                            th(scope="row") #{index + 1}
+                            td
+                                img(src=item.product.thumbnail, alt="moimoi" style='width: 100px; height: 100px ')
+                            td #{item.product.title}
+                            td
+                                input(type="number" min='1' value=item.quantity style='width: 80px' name='quantity' product-id=item.product_id)
+                            td  #{item.product.priceNew}$
+                            td  #{item.totalPay}
+                            td
+                                button(class='btn btn-danger' button-delete-checkout product-id=item.product_id) Xóa
+            .btn.btn-success Tổng tiền: #{totalPerOrder}
+            div
+                a(class='btn btn-success' href='/checkout') Thanh toán
+        else 
+            h4 Chưa có sản phẩm nào được thêm vào giỏ hàng

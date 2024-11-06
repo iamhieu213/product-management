@@ -1,0 +1,6 @@
+mixin category-tree(items, level = 0, parentID="")
+    - const prefix = Array(level + 1).join('-- ');
+    each item in items
+        option(value=item.id selected=(item.id==parentID?true:false)) #{prefix + item.title}
+        -if(item.children&&item.children.length > 0)
+            +category-tree(item.children, level + 1, parentID)

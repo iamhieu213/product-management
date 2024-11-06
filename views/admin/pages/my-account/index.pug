@@ -1,0 +1,16 @@
+extends ../../layouts/default.pug
+
+block main 
+    h2 Thông tin tài khoản
+
+    p Tên: #{user.fullName}
+
+    p email: #{user.email}
+
+    p Số điện thoại: #{user.phone}
+
+    p Chức vụ: #{permissions.title}
+
+    img(src=user.avatar, alt="xx" width=200 height=200)
+
+    a(href=`${prefixAdmin}/my-account/edit/` class="btn btn-success") Chỉnh sửa 

@@ -1,0 +1,7 @@
+extends ../../layouts/default.pug
+include ../../mixins/products-list.pug
+
+block main 
+    h2 #{pageTitle}
+    +products-list(outstandingProducts, "Sản phẩm nổi bật")
+    +products-list(newProductsList, "Sản phẩm mới")

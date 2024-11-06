@@ -1,0 +1,50 @@
+doctype html
+head
+    title=title
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
+    link(rel="stylesheet", href="/admin/css/style.css")
+body
+    header.header
+        .logo ADMIN
+        div 
+            a(href="/admin/my-account" class='logout btn btn-primary') #{user.fullName}
+            a(href="/admin/auth/logout" class='logout btn btn-danger') Đăng xuất
+    .body 
+
+        
+        .sider
+            ul
+                li
+                    a(href=`${prefixAdmin}/dashboard`)  Tổng quan
+                
+                if(permissions.role.includes("products-category-view"))
+                    li
+                        a(href=`${prefixAdmin}/products-category`) Danh mục sản phẩm
+
+                if(permissions.role.includes('products-view'))
+                    li
+                        a(href=`${prefixAdmin}/products`)  Danh sách sản phẩm
+                if(permissions.role.includes('roles-view'))
+                    li
+                        a(href=`${prefixAdmin}/roles`)  Nhóm quyền
+                
+                if(permissions.role.includes('permissions-view'))
+                    li
+                        a(href=`${prefixAdmin}/roles/permissions`)  Phân quyền
+
+                if(permissions.role.includes('accounts-view'))
+                    li
+                        a(href=`${prefixAdmin}/accounts`)  Danh sách tài khoản
+
+                if(permissions.role.includes('accounts-view'))
+                    li
+                        a(href=`${prefixAdmin}/setting/general`)  Cài đặt chung
+                
+        .main
+            block main
+        
+        
+        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct" crossorigin="anonymous"></script>
+        script(src="/tinymce/tinymce.min.js")
+        script(src="/admin/js/tinymce-config.js") 

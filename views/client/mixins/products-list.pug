@@ -1,0 +1,29 @@
+include box-head.pug
+include alert-error.pug
+    
+mixin products-list(items, title)
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.error)
+        +alert-danger(2000)
+    .container.my-3
+        .row
+            .col-12
+                +boxhead(title)
+        .row
+            each item in items
+                .col-4.mb-3.product-item
+                    if(item.isOutstanding = '1')
+                        span(class="badge badge-pill badge-success top-right") Nổi bật
+                    .inner-image
+                        img(src=item.thumbnail, alt=item.title)
+                    .inner-content
+                        h3.inner-title #{item.title}
+                        .inner-price-new #{item.newPrice}$
+                        .inner-price-old #{item.price}$
+                        .inner-discount #{item.discountPercentage}%
+
+                        a(
+                            class="btn btn-secondary"
+                            href =`/products/detail/${item.slug}`
+                        ) Chi tiết

@@ -1,0 +1,18 @@
+
+extends ../../layouts/default.pug
+include ../../mixins/products-list.pug
+include ../../mixins/alert-error.pug
+block main
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.error)
+        +alert-danger(2000)
+    .container 
+
+        if(user) 
+            p Tên: #{user.fullName}
+
+            p email: #{user.email}
+
+            p Số điện thoại: #{user.phone}
+            a(href=`/user/edit` class="btn btn-success") Chỉnh sửa 

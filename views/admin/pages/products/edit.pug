@@ -1,0 +1,70 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert-error.pug
+include ../../mixins/alert-error.pug
+include ../../mixins/category-tree.pug
+block main
+    if(permissions.role.includes('products-edit'))
+        if(messages.success)
+            .alert-success #{messages.success}
+        -if(messages.error)
+            +alert-danger(2000)
+        form(
+            action=`/admin/products/edit/${item.id}?_method=PATCH`
+            method="POST"
+            form-edit-product
+            id="form-create"
+            enctype="multipart/form-data"
+        )
+            .row
+                .col-12
+                    label(for="title") Nhập tên sản phẩm 
+                    input(type="text" placeholder="Tên sản phẩm" name="title" id="title" value=item.title)
+                .col-12
+                    label(for="description") Nhập mô tả
+                    textarea(name="description" placeholder="Nhập mô tả") !{item.description}
+                .col-12
+                    label(for="categoryID") Chọn danh mục
+                    select(name="categoryID" id="categoryID")
+                        option(value="") -- Chọn danh mục -- 
+                        +category-tree(listCategory, 0, item.categoryID)
+                .col-12
+                    label(for="price") Nhập giá
+                    input(type="text" name="price" placeholder="Nhập giá" id="price" value=item.price)
+                .col-12
+                    label(for="discountPercentage") Giảm giá
+                    input(type="text" name="discountPercentage" placeholder="Nhập % giảm giá" id="discountPercentage" value=item.discountPercentage)
+                .col-12
+                    label(for="thumbnail") Ảnh
+                    input(type="file" name="thumbnail" id ="thumbnail" accept="image/*")  
+
+                .col-4
+                    .preview-image
+                        img(src=item.thumbnail, alt="moi")
+                        button(close-preview type="button") x
+
+                .col-12
+                    label(for="position") Nhập vị trí
+                    input(type="text" name="position" placeholder="Nhập vị trí" id="position" value=item.position)
+                
+                .col-12
+                    label(for="status") Trạng thái
+
+                .col-12
+                    .row 
+                        .col-6.row
+                            .col-6 
+                                label(for="act") Hoạt động
+                            .col-6
+                                input(type="radio" name="status" value="active" id="act" checked=item.status=="active"?true:false)
+                    
+                        .col-6.row
+                            .col-6 
+                                label(for="inact") Dừng hoạt động
+                            .col-6 
+                                input(type="radio" name="status" value="inactive" checked=item.status=="active"?false:true)    
+
+                .col-12
+                    button(type="submit") Cập nhật 
+
+        script(src="/admin/js/edit.js")
+        script(src="/admin/js/create-page.js") 

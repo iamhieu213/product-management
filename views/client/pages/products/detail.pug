@@ -1,0 +1,27 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert-error.pug
+block main
+
+    
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.danger)
+        +alert-danger(2000)
+
+    .container
+        h2(class="btn btn-success") #{item.title}
+
+        p Mô tả: #{item.description}
+
+        p Giá: #{item.price}
+
+        p Giảm giá: #{item.discountPercentage}
+
+        form(
+            action=`/carts/add/${item.id}`
+            method = 'Post'
+        )
+            input(type="number" min ='1' name='quantity' value='1')
+            button(type="submit" class='btn btn-success') Thêm vào giỏ hàng
+
+        img(src=item.thumbnail, alt="xx" width=200 height=200)

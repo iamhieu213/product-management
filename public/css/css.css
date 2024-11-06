@@ -1,0 +1,323 @@
+.header {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.inner-logo img{
+    max-height: 50px;
+    max-width: 100%;
+}
+
+
+.header .inner-menu .menu {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.header .category .category-item{
+    position: relative;
+}
+
+.header .category{
+    display: none;
+    position: absolute;
+    z-index: 999;
+}
+
+.header .menu__products:hover .category {
+    display: block;
+}
+
+.header .category .category-item a{
+    padding: 10px;
+    background-color: #ddd;
+    text-decoration: none;
+    display: inline-block;
+    width: 100%;
+    border: 1px solid black;
+    position: relative;
+    white-space: nowrap;
+    box-sizing: border-box;
+}
+
+
+.header .category .category-item>.sub-category {
+    position: absolute;
+    top: 0;
+    right: 100%;
+    display: none;
+}
+
+
+.header .category .category-item:hover>.sub-category {
+    display: block;
+}
+
+
+/* ul {
+    list-style: none;
+}
+
+.header .menu__products .category {
+    position: absolute;
+    display: none;
+}
+
+.header .menu__products:hover .category {
+    display: block;
+}
+
+.header .menu__products .category .category-item{
+    position: relative;
+    background-color: green;
+}
+
+.header .menu__products .category .category-item:hover>.sub-category{
+    display: block;
+}
+
+.header .menu__products .category-item>.sub-category {
+    position: absolute;
+    left: -200%;
+    top: 0;
+    display: none;
+} */
+
+footer{
+    text-align: center; 
+    padding: 10px 0;
+    color: white;
+    background-color: rgb(43, 40, 40);
+}
+
+h2.inner-title{
+    color: green;
+    font-size: 30px;
+}
+
+.product-item {
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 20px;
+    position: relative;
+}
+
+.top-right{
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.product-item .inner-image{
+    width: 100%;
+    aspect-ratio: 4/3;
+}
+
+.product-item .inner-image img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.product-item .inner-content{
+    padding: 10px 10px;
+}
+
+.product-item .inner-content .inner-title{
+    color: blue;
+}
+
+.product-item .inner-content .inner-price-new{
+    background-color: green;
+    color: white;
+    text-align: center;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.product-item .inner-content .inner-price-old{
+    background-color: red;
+    color: white;
+    text-align: center;
+    width: 100px;
+    border-radius: 5px;
+    text-decoration: line-through;
+}
+
+.product-item .inner-content .inner-discount{
+    background-color: blueviolet;
+    color: white;
+    text-align: center;
+    width: 100px;
+    border-radius: 5px;
+}
+
+.alert-success {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background-color: green;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 5px;
+    z-index: 9999;
+    opacity: 1;
+    animation: slideOut 3s ease-out forwards; /* Tổng thời gian là 3 giây */
+  }
+  
+  @keyframes slideOut {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    70% {
+      transform: translateX(0); /* Đứng yên trong 70% thời gian (2.1 giây) */
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(100%); /* Di chuyển trong 30% thời gian còn lại (0.9 giây) */
+      opacity: 0;
+    }
+  }
+
+  .alert-hidden{
+    animation: disappear-right 1s linear forwards;
+  }
+  
+  @keyframes disappear-right {
+    0% {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateX(100%);
+    }
+  }
+
+.alert{
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+    display: inline-block;
+}
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+    
+
+.chat-container {
+    width: 400px;
+    background-color: white;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    position: relative;
+}
+
+.chat-header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: scroll;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 60px;
+}
+
+/* form[inner-form] {
+    position: relative;
+} */
+
+.message {
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    max-width: 70%;
+    word-wrap: break-word;
+}
+
+.message.received {
+    background-color: #e0e0e0;
+    align-self: flex-start;
+}
+
+.message.sent {
+    background-color: #4CAF50;
+    color: white;
+    align-self: flex-end;
+}
+
+.time {
+    display: block;
+    font-size: 12px;
+    margin-top: 5px;
+    text-align: right;
+}
+
+.chat-input {
+    display: flex;
+    padding: 10px;
+    background-color: #eee;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 999;
+}
+
+#messageInput {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    
+}
+
+#sendButton {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+#sendButton:hover {
+    background-color: #45a049;
+}
+

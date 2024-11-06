@@ -1,0 +1,41 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert-error.pug
+include ../../mixins/alert-error.pug
+include ../../mixins/category-tree.pug
+block main
+    if(messages.success)
+        .alert-success #{messages.success}
+    -if(messages.error)
+        +alert-danger(2000)
+    form(
+        action=`/admin/my-account/edit/?_method=PATCH`
+        method="POST"
+        form-edit-product
+        id="form-create"
+        enctype="multipart/form-data"
+    )
+        .row
+            .col-12
+                label(for="fullName") Tên người dùng
+                input(type="text" placeholder="Tên sản phẩm" name="fullName" id="fullName" value=user.fullName)
+            .col-12
+                label(for="email") Email
+                input(name="email" placeholder="Nhập mô tả" id='email' value=user.email)
+            .col-12
+                label(for="phone") Số điện thoại
+                input(type="text" name="phone" placeholder="Nhập SDT" id="phone" value=user.phone)
+            .col-12
+                label(for="password") Nhập mật khẩu
+                input(type="text" name="password" placeholder="Nhập mật khẩu" id="password" )
+            .col-12
+                label(for="avatar") Ảnh
+                input(type="file" name="avatar" id ="avatar" accept="image/*")  
+            .col-4
+                .preview-image
+                    img(src=user.avatar, alt="moi")
+                    button(close-preview type="button") x
+
+            .col-12
+                button(type="submit") Cập nhật 
+
+    script(src="/admin/js/create-page.js") 

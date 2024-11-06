@@ -1,0 +1,43 @@
+include ../mixins/tree-category.pug
+header.header
+  .container
+    .row.align-items-center
+      .col-3
+        .inner-logo
+          a(href="/")
+            img(src=settingGeneral.logo, alt="Logo")
+
+      .col-4
+        form(
+          method='GET'
+          action='/search'
+        )
+          div(class="form-inline")
+            input(type="text" class="form-control" placeholder='Nhập sản phẩm' name='keyword' value=keyword)
+            button(type="submit" class="btn btn-primary") Tìm kiếm
+        
+      .col-5
+        .inner-menu
+          ul(class='menu')
+            li(class='menu__home')
+              a(href="/") Trang chủ
+
+            li(class='menu__products')
+              a(href="/products") Sản phẩm
+              ul(class='category')
+                +tree-category(listCategory)
+            li(class='menu_cart')
+              a(href="/carts") Giỏ hàng (#{totalCart})
+            if(user)
+              li(class='menu_logout')
+                a(href="/user/logout") Đăng xuất
+              li(class='menu_infor')
+                a(href="/user/info") #{user.fullName}
+              li(class='menu_chat')
+                a(href="/chat") chat
+            else 
+              li(class='menu_register')
+                a(href="/user/register") Đăng ký
+              li(class='menu_login')
+                a(href="/user/login") Đăng nhập
+                

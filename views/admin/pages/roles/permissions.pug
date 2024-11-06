@@ -1,0 +1,157 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert-error.pug
+block main
+
+    if(permissions.role.includes('permissions-edit'))
+        -if(messages.error)
+            +alert-danger(2000)
+        -if(messages.success)
+            .alert-success #{messages.success}
+
+        h1 Trang phân quyền
+        div(data-to-show=roles)
+        table 
+            thead 
+                tr
+                    th Hành động
+                    each item in roles
+                        th #{item.title}
+                
+            tbody 
+
+                tr(data-name="id")
+                    td 
+                    each item in roles
+                        td
+                            input(type="text" value=item.id class='d-none')
+
+                tr 
+                    td(colspan=(roles.length-1))
+                        h6 Danh mục sản phẩm
+                tr(data-name="products-category-view")  
+                    td Xem
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="products-category-create")
+                    td Thêm
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="products-category-edit")
+                    td Sửa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="products-category-delete")
+                    td Xóa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                
+
+                tr 
+                    td(colspan=(roles.length-1))
+                        h6 Danh sách sản phẩm
+                tr(data-name="products-view")  
+                    td Xem
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="products-create")
+                    td Thêm
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="products-edit")
+                    td Sửa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="products-delete")
+                    td Xóa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                
+                tr 
+                    td(colspan=(roles.length-1))
+                        h6 Nhóm quyền
+                tr(data-name="roles-view")  
+                    td Xem
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="roles-create")
+                    td Thêm
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="roles-edit")
+                    td Sửa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="roles-delete")
+                    td Xóa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                
+                tr 
+                    td(colspan=(roles.length-1))
+                        h6 Nhóm quyền
+                tr(data-name="permissions-view")  
+                    td Xem
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="permissions-create")
+                    td Thêm
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="permissions-edit")
+                    td Sửa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="permissions-delete")
+                    td Xóa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+
+                tr 
+                    td(colspan=(roles.length-1))
+                        h6 Danh sách tài khoản
+                tr(data-name="accounts-view")  
+                    td Xem
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="accounts-create")
+                    td Thêm
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="accounts-edit")
+                    td Sửa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+                tr(data-name="accounts-delete")
+                    td Xóa
+                    each item in roles 
+                        th 
+                            input(type="checkbox")
+        form(
+            action="/admin/roles/permissions?_method=PATCH",
+            method="POST"
+            form-data-roles-for-submit
+        )
+            input(type="text" input-data-roles-for-submit name='data' class='d-none')
+            button(type="button" class='btn btn-success' update) Cập nhật
+
+        script(src="/admin/js/create-page.js")
+        script(src="/admin/js/roles.js")

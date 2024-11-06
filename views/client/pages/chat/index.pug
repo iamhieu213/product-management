@@ -1,0 +1,31 @@
+extends ../../layouts/default.pug
+include ../../mixins/products-list.pug
+include ../../mixins/alert-error.pug
+block main
+    -if(messages.success)
+        +alert-success(2000)
+    -if(messages.danger)
+        +alert-danger(2000)
+    .container 
+        h2 #{pageTitle}
+        .chat-container
+            .chat-header
+                h2 Chat Room
+            .chat-messages(id="chat-messages" my-id=user.id)
+                //- Chat messages will appear here
+                each chat in chats
+                    if(chat.user_id == user.id)
+                        .message(class="sent")
+                            p #{chat.content}
+
+                    else 
+                        .message(class="received")
+                            span(class="time") #{chat.infoUser}
+                            p #{chat.content}
+                            
+                    
+            form(action="" inner-form)
+                .chat-input
+                    input(id="messageInput" type="text" placeholder="Type a message...")
+                    button(id="sendButton") Send
+

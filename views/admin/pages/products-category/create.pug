@@ -1,0 +1,61 @@
+extends ../../layouts/default.pug
+include ../../mixins/alert-error.pug
+include ../../mixins/category-tree.pug
+block main
+
+    if(permissions.role.includes('products-category-create'))
+        -if(messages.error)
+            +alert-danger(2000)
+        form(
+            action="/admin/products-category/create?_method=POST"
+            method="POST"
+            id="form-create"
+            enctype="multipart/form-data"
+        )
+            .row
+                .col-12
+                    label(for="title") Nhập tên sản phẩm 
+                    input(type="text" placeholder="Tên sản phẩm" name="title" id="title")
+                .col-12
+                    label(for="description") Nhập mô tả
+                    textarea(name="description" id="description" placeholder="Nhập mô tả") 
+                .col-12
+                    label(for="parentID") Danh mục cha
+                    select(name="parentID" id="parentID")
+                        option(value="") Chọn danh mục cha 
+                        +category-tree(listCategory)
+                    
+                .col-12
+                    label(for="thumbnail") Ảnh
+                    input(type="file" name="thumbnail" id ="thumbnail" accept="image/*")  
+
+                .col-4
+                    .preview-image
+                        img(src="", alt="moi")
+                        button(close-preview type="button") x
+
+                .col-12
+                    label(for="position") Nhập vị trí
+                    input(type="text" name="position" placeholder="Nhập vị trí" id="position")
+                
+                .col-12
+                    label(for="status") Trạng thái
+
+                .col-12
+                    .row 
+                        .col-6.row
+                            .col-6 
+                                label(for="act") Hoạt động
+                            .col-6
+                                input(type="radio" name="status" value="active" id="act" checked)
+                    
+                        .col-6.row
+                            .col-6 
+                                label(for="inact") Dừng hoạt động
+                            .col-6 
+                                input(type="radio" name="status" value="inactive")    
+
+                .col-12
+                    button(type="submit") Tạo danh mục mới 
+
+        script(src="/admin/js/create-page.js")
